@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="styles.css" />
+    <title>Registration Confirmation</title>
+</head>
+
+<body>
+  <div id="dashboardHeader">
+    <h1>Registration Confirmation</h1>
+
+    
+    
+	
+	 <table id="dashboardTbl">
+	  <tr>
+		<th>Name</th>
+		<th>Email</th>
+		
+	  </tr>
+	  <tr>
+		<td>
+		 <h4 id="name"></h4>
+		</td>
+		<td>
+		 <h4 id="email" class="dashboardEmail"></h4>
+		</td>
+		
+	  </tr>
+	 </table>
+     
+      <button onclick="doLogout()" id="logoutBtn">Logout</button>
+</div>
+    <script>
+
+
+        let loggedInUser = {};
+
+        (() => {
+
+            let item = localStorage.getItem("loggedInUser");
+
+            if (item) loggedInUser = JSON.parse(item);
+            else {
+                window.location.href = "./login.html"
+                return;
+            }
+
+
+            document.querySelector("#email").innerText = loggedInUser.email;
+
+            document.querySelector("#name").innerText =
+                `${loggedInUser.firstName} ${loggedInUser.lastName}`;
+
+        })()
+
+        function doLogout() {
+            localStorage.removeItem("loggedInUser");
+
+            window.location.href = "./login.html";
+        }
+
+
+    </script>
+
+</body>
+
+</html>
